@@ -1,4 +1,4 @@
-use std::error;
+use std::{error, isize};
 use std::fmt::Error;
 use std::io::{self, BufRead};
 use std::fs;
@@ -22,7 +22,19 @@ fn findstar(file_path: &str) -> Result<isize,Box<dyn error::Error>> {
     let file = fs::File::open(file_path)?;
     let lines = io::BufReader::new(file).lines();
 
+    let mut v0: Vec<isize> = Vec::new();
+    let mut v1: Vec<isize> = Vec::new();
+    for line in lines.flatten() {
+        let mut numbers = line.split(' ').map(|s| s.parse::<isize>()).flatten();
+        v0.push(numbers.next().unwrap());
+        v1.push(numbers.next().unwrap());
+    };
 
-    let solution = 11;
+    v0.sort();
+    v1.sort();
+
+    
+    println!("{:?}",v1);
+    let solution = 1;
     Ok(solution)
 }
