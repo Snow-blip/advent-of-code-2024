@@ -1,3 +1,4 @@
+use std::path::absolute;
 use std::{error, isize};
 use std::fmt::Error;
 use std::io::{self, BufRead};
@@ -33,8 +34,11 @@ fn findstar(file_path: &str) -> Result<isize,Box<dyn error::Error>> {
     v0.sort();
     v1.sort();
 
+    let mut sum = 0;
+    for (&mut ai, &mut bi) in v0.iter_mut().zip(v1.iter_mut()) {
+        sum += (ai-bi).abs();
+    }
     
-    println!("{:?}",v1);
-    let solution = 1;
+    let solution = sum;
     Ok(solution)
 }
